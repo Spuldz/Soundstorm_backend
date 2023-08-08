@@ -9,11 +9,11 @@ export const songRouter = express.Router()
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, file.fieldname === "audio" ? "./public/audio" : "./public/thumbnails")
+        cb(new ServerError("file failed to upload"), file.fieldname === "audio" ? "./public/audio" : "./public/thumbnails")
     },
     filename: (req, file, cb) => {
       //  console.log(file)
-        cb(null, Date.now() + path.extname(file.originalname))
+        cb(new ServerError("file failed to upload"), Date.now() + path.extname(file.originalname))
     }
 })
 
