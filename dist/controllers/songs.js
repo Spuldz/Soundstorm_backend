@@ -32,6 +32,7 @@ const uploadSong = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     data.tags = ["music"];
     data.ownerName = req.user.username;
     const song = yield Song_1.default.create(data);
+    console.log(data);
     res.json({ song });
 });
 exports.uploadSong = uploadSong;

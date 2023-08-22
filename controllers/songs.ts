@@ -27,6 +27,7 @@ export const getAllSongs = async (req: Request, res: Response) => {
     data.ownerName = req.user.username
 
     const song = await Song.create(data)
+    console.log(data)
 
     res.json({ song })
 
