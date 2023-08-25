@@ -38,12 +38,12 @@ app.get("/hello", auth_1.authMiddleware, (req, res) => {
 //middleware
 app.use(error_handler_1.errorHandlerMiddleware);
 app.use(not_found_1.NotFoundMiddleware);
-app.listen(port, () => {
-    console.log("listening on port: " + port);
-});
 const start = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield (0, connect_1.connectDB)(process.env.MONGO_URI);
+        app.listen(port, () => {
+            console.log("listening on port: " + port);
+        });
     }
     catch (error) {
         console.log("failed to start server");

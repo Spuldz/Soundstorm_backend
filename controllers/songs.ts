@@ -10,7 +10,7 @@ export const getAllSongs = async (req: Request, res: Response) => {
 };
 
   export const uploadSong = async (req:Request | any, res:Response) => {
-
+    console.log("hey")
     console.log(req.files)
 
     const info:ISong = JSON.parse(req.body.info)

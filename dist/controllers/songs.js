@@ -21,6 +21,7 @@ const getAllSongs = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.getAllSongs = getAllSongs;
 const uploadSong = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("hey");
     console.log(req.files);
     const info = JSON.parse(req.body.info);
     const audioFile = req.files['audio'][0];
