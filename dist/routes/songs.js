@@ -23,3 +23,4 @@ const multipleUpload = upload.fields([{ name: "audio", maxCount: 1 }, { name: "t
 exports.songRouter.get("/", songs_1.getAllSongs);
 exports.songRouter.post("/", multipleUpload, songs_1.uploadSong);
 exports.songRouter.get("/getAudio/:name", songs_1.getAudio);
+exports.songRouter.get("/public", songs_1.getAllPublicSongs);

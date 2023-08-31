@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllSongs, getAudio, uploadSong } from '../controllers/songs'
+import { getAllPublicSongs, getAllSongs, getAudio, uploadSong } from '../controllers/songs'
 import multer from 'multer'
 import path from 'path'
 import { ServerError } from '../errors/server-error'
@@ -23,3 +23,4 @@ const multipleUpload = upload.fields([{name: "audio", maxCount: 1}, {name: "thum
 songRouter.get("/", getAllSongs)
 songRouter.post("/" ,multipleUpload, uploadSong)
 songRouter.get("/getAudio/:name", getAudio)
+songRouter.get("/public", getAllPublicSongs)

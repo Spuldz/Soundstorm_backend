@@ -40,3 +40,8 @@ export const getAllSongs = async (req: Request, res: Response) => {
       res.sendFile(filePath)
   }
 
+
+  export const getAllPublicSongs = async (req:Request, res:Response) => {
+      const songs = await Song.find({public: true})
+      res.json({ songs })
+  }
