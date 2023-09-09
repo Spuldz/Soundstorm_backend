@@ -24,3 +24,5 @@ exports.songRouter.get("/", songs_1.getAllSongs);
 exports.songRouter.post("/", multipleUpload, songs_1.uploadSong);
 exports.songRouter.get("/getAudio/:name", songs_1.getAudio);
 exports.songRouter.get("/public", songs_1.getAllPublicSongs);
+exports.songRouter.get("/:id", songs_1.getSongById);
+exports.songRouter.get("/search/:query", songs_1.searchSongs);

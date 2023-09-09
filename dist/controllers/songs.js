@@ -12,9 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllPublicSongs = exports.getAudio = exports.uploadSong = exports.getAllSongs = void 0;
+exports.searchSongs = exports.getSongById = exports.getAllPublicSongs = exports.getAudio = exports.uploadSong = exports.getAllSongs = void 0;
 const Song_1 = __importDefault(require("../models/Song"));
 const path_1 = __importDefault(require("path"));
+const not_found_1 = require("../errors/not-found");
+const bad_request_1 = require("../errors/bad-request");
 const getAllSongs = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const songs = yield Song_1.default.find({});
     res.json({ songs });
@@ -48,3 +50,20 @@ const getAllPublicSongs = (req, res) => __awaiter(void 0, void 0, void 0, functi
     res.json({ songs });
 });
 exports.getAllPublicSongs = getAllPublicSongs;
+const getSongById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    if (!id)
+        throw new bad_request_1.BadRequest("invalid id");
+    const song = yield Song_1.default.findOne({ _id: id });
+    if (!song)
+        throw new not_found_1.NotFound("song not found");
+    res.json({ song });
+});
+exports.getSongById = getSongById;
+const searchSongs = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { query } = req.params;
+    const regex = new RegExp(query, "i");
+    const songs = yield Song_1.default.find({ name: { $regex: regex } });
+    res.json({ songs });
+});
+exports.searchSongs = searchSongs;

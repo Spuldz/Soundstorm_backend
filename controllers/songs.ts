@@ -3,6 +3,8 @@ import Song from '../models/Song'
 import { ISong } from "../types/ISong";
 import fs from 'fs'
 import path from "path";
+import { NotFound } from "../errors/not-found";
+import { BadRequest } from "../errors/bad-request";
 
 export const getAllSongs = async (req: Request, res: Response) => {
     const songs = await Song.find({})
@@ -44,4 +46,23 @@ export const getAllSongs = async (req: Request, res: Response) => {
   export const getAllPublicSongs = async (req:Request, res:Response) => {
       const songs = await Song.find({public: true})
       res.json({ songs })
+  }
+
+  export const getSongById = async (req:Request, res:Response) => {
+    const {id} = req.params
+    if(!id) throw new BadRequest("invalid id")
+
+    const song = await Song.findOne({_id: id})
+    if(!song) throw new NotFound("song not found")
+
+    res.json({ song })
+  }
+
+  export const searchSongs = async (req:Request, res:Response) => {
+    const {query} = req.params
+    const regex = new RegExp(query as string, "i")
+
+    const songs = await Song.find({name: {$regex: regex}})
+
+    res.json({ songs })
   }

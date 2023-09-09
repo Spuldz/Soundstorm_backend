@@ -1,5 +1,5 @@
 import express from 'express'
-import { getAllPublicSongs, getAllSongs, getAudio, uploadSong } from '../controllers/songs'
+import { getAllPublicSongs, getAllSongs, getAudio, getSongById, searchSongs, uploadSong } from '../controllers/songs'
 import multer from 'multer'
 import path from 'path'
 import { ServerError } from '../errors/server-error'
@@ -24,3 +24,5 @@ songRouter.get("/", getAllSongs)
 songRouter.post("/" ,multipleUpload, uploadSong)
 songRouter.get("/getAudio/:name", getAudio)
 songRouter.get("/public", getAllPublicSongs)
+songRouter.get("/:id", getSongById)
+songRouter.get("/search/:query", searchSongs)
